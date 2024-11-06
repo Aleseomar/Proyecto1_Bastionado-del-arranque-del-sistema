@@ -1,0 +1,133 @@
+
+<!doctype html>
+
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+  <meta name="theme-color" content="#4F7DC9">
+  <meta charset="UTF-8">
+  <title>Bastionamiento de una BIOS/UEFI</title>
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Code+Pro:400|Roboto:400,300,400italic,500,700|Roboto+Mono">
+  <link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="https://storage.googleapis.com/claat-public/codelab-elements.css">
+  <style>
+    .success {
+      color: #1e8e3e;
+    }
+    .error {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <google-codelab-analytics gaid="UA-49880327-14"></google-codelab-analytics>
+  <google-codelab codelab-gaid=""
+                  id="docs"
+                  title="Bastionamiento de una BIOS/UEFI"
+                  environment="web"
+                  feedback-link="">
+    
+      <google-codelab-step label="Introducción y preparación del proyecto" duration="0">
+        <p><strong>Realizado por:</strong> Alejandro Seoane Martínez<br><strong>Asigantura:</strong> Bastionado de redes y sistemas<br><strong>Curso:</strong> 2024/25<br><strong>Grado:</strong> G.E.C.E.G.S.</p>
+<p class="image-container"><img alt="Portada" src="img\\d3e8af2fc9c87f6.png"></p>
+<h2 is-upgraded>Introducción</h2>
+<p>En este proyecto se nos encarga elaborar una guía para bastionar la BIOS/UEFI de un ordenador.</p>
+<p>La BIOS es lo primero que se ejecuta en un ordenador cuando lo encendemos. En ella se guarda la información básica del dispositivo.<br> Es por ello que tendremos que implementar unos controles de seguridad, debido a que puede haber alteraciones en el arranque de dispositivos o cambiar configuraciones importantes de la BIOS.</p>
+<h2 is-upgraded>Preparación</h2>
+<p>Para este proyecto necesitaremos configurar una BIOS. Para no tener que usar una BIOS real utilizaremos un emulador de BIOS que simula las mismas funciones que una BIOS real. <a href="https://download.lenovo.com/bsco/index.html#/" target="_blank">Enlace del emulador</a>.</p>
+<p class="image-container"><img alt="imagen" src="img\\1a2cb0ba5d1e791e.png"></p>
+<p>Escogeremos un modelo de ordenador de los que nos ofrece el emulador y entraremos en la interfaz de texto, aunque hay algunos modelos que nos permiten seleccionar interfaz gráfica.</p>
+<p class="image-container"><img alt="imagen1" src="img\\906774059dcf189e.png"></p>
+<p>Una vez vista esta pequeña introducción vamos a realizar los distintos niveles de seguridad que podemos tener en la BIOS.</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Contraseñas" duration="0">
+        <p>Nos dirigiremos a la pestaña de <em>Security</em> para empezar con la configuración.</p>
+<p><strong>Nota:</strong> Hay configuraciones en el emulador que nos saldrá el mensaje &#34;<em>Emulator No Support</em>&#34;. Esto quiere decir que el emulador no puede ejecutar la acción pero nosotros hemos enseñado cómo se haría cada acción.</p>
+<h2 is-upgraded>Contraseña de administrador</h2>
+<p>Es la que limita el acceso a la configuración de la BIOS. Al entrar en la pestaña de seguridad encontraremos como primer parámetro &#34;Set Supervisor Password&#34;. Con esta opción introduciremos una contraseña de administrador.</p>
+<p class="image-container"><img alt="imagen2" src="img\\4bf6509e9c7f4b62.png"></p>
+<p>Nos saldrá el menú para implementar la contraseña de administrador. Nos pedirá la contraseñá y otra vez la confirmación de la contraseña.</p>
+<p class="image-container"><img alt="imagen3" src="img\\19860bcc9a5e433f.png"></p>
+<h2 is-upgraded>Contraseña de usuario</h2>
+<p>Funciona como contraseña de inicio. Se solicitará al arrancar el sistema o entrar en la BIOS.<br> Esta contraseña también se puede referir a la <strong>contraseña de arranque del dispositivo</strong> (contraseña Power-On).</p>
+<p>Como en el apartado anterior localizamos el apartado que se llama &#34;Set Power-On Password&#34;.</p>
+<p class="image-container"><img alt="imagen4" src="img\\d0710b0a21d3d4f5.png"></p>
+<p>Nos aparecerá un menú donde ingresar la contraseña.</p>
+<p class="image-container"><img alt="imagen5" src="img\\ea5396ca94a67b87.png"></p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Secure Boot" duration="0">
+        <p>Es una característica de seguridad que la implementó Windows y algunas distribuciones de Linux se han adaptado para permitir la ejecución de este.<br> Secure Boot permite denegar la ejecución de software no firmado durante el arranque.</p>
+<p class="image-container"><img alt="imagen6" src="img\\ba2c73be435de7df.png"></p>
+<p>Una vez entramos en el menú nos aparece los siguientes parámetros:</p>
+<p class="image-container"><img alt="imagen7" src="img\\39521bfbcea9c74.png"></p>
+<p>Nosotros nos fijaremos en activar la opción que nos dice Secure Boot.</p>
+<p class="image-container"><img alt="imagen8" src="img\\23170b9c708eb850.png"></p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Configuración de arranque" duration="0">
+        <h2 is-upgraded>Orden de arranque</h2>
+<p>Definiremos la secuencia en la que el sistema buscará el dispositivo de arranque. Deberemos de configurarlo para priorizar el disco duro principal donde esté instalado el sistema operativo.<br> Para ellos tendremos que irnos al apartado de &#34;Startup&#34; y entraremos en &#34;Boot Priority Order&#34;.</p>
+<p class="image-container"><img alt="imagen9" src="img\\f274e59f5683439.png"></p>
+<p>Nosotros en este menú ordenaremos los distintos dispositivos de mayor a menor prioridad y lo guardaremos.</p>
+<p class="image-container"><img alt="imagen10" src="img\\2c415c23867eca97.png"></p>
+<p>La opción de &#34;First Boot Device&#34; seleccionaremos &#34;Boot Order&#34; para que ejecute el orden que hemos definido anteriormente.</p>
+<p class="image-container"><img alt="image11" src="img\\4d2320edd0e6b68d.png"></p>
+<h2 is-upgraded>Permiso para el arranque desde dispositivos USB</h2>
+<p>Tener esta opción deshabilitada previene el arranque desde unidades extraíbles, reduciendo el riesgo de posibles arranques no autorizados. Esta opción nos aparece en la pestaña de Security como &#34;Smart USB Protection&#34;.</p>
+<p class="image-container"><img alt="image12" src="img\\79e5b499b3f25b8a.png"></p>
+<p>Nos saldrá un menú con 3 opciones:</p>
+<ul>
+<li>Deshabilitado</li>
+<li>Solo lectura (el usuario podrá copiar cosas del USB pero al revés no).</li>
+<li>Sin acceso (el usuario no podrá utilizar lo que tenga el USB).</li>
+</ul>
+<p class="image-container"><img alt="image13" src="img\\ba966ad2911680a8.png"></p>
+<p>Esta última opción es la que escogeremos.</p>
+<p class="image-container"><img alt="image14" src="img\\6d0906e69e7d121b.png"></p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Otras configuraciones de seguridad" duration="0">
+        <p>Una vez explicados los puntos importantes que se nos pedían en el proyecto procederemos a explicar otras opciones de configuración de seguridad de la BIOS.</p>
+<h2 is-upgraded>Hard Disk Password</h2>
+<p>Esta opción es una función de seguridad que permite establecer contraseñas para proteger el acceso a las unidades de almacenamiento.</p>
+<p class="image-container"><img alt="image15" src="img\\3e4f55fa0c33f397.png"></p>
+<p>Al entrar en la opción nos saldrá un menú de opciones:</p>
+<ul>
+<li>M.2 Drive 1 Password: Opción que nos dejará insertar una contraseña al M.2</li>
+<li>SATA Drive 1/2: Contraseña para las 2 unidades SATA que hay conectadas en el sistema.</li>
+<li>Require HDP on System Boot: Opción que nos determinará si se solicitará la contraseña del disco duro al iniciar el sistema.</li>
+</ul>
+<p class="image-container"><img alt="image16" src="img\\b48e78d00b3ef25.png"></p>
+<h2 is-upgraded>Password Policies</h2>
+<p>Esta opción es un conjunto de reglas  y opciones que determinan cómo se manejan y aplican contraseñas en algunos parámetros.</p>
+<p class="image-container"><img alt="image17" src="img\\cb74e9729cc1a522.png"></p>
+<p>Podemos ver opciones interesantes como:</p>
+<ul>
+<li>BIOS Password At Reboot: determinará si pedirá la contraseña de la BIOS cuando se reinicie el sistema.</li>
+<li>BIOS Password At Boot Device List: controla si se quiere la contraseña de la BIOS para acceder a la lista de dispositivos de arranque cuando inicias el equipo.</li>
+</ul>
+<p class="image-container"><img alt="image18" src="img\\3f298c56485708c6.png"></p>
+
+
+      </google-codelab-step>
+    
+  </google-codelab>
+
+  <script src="https://storage.googleapis.com/claat-public/native-shim.js"></script>
+  <script src="https://storage.googleapis.com/claat-public/custom-elements.min.js"></script>
+  <script src="https://storage.googleapis.com/claat-public/prettify.js"></script>
+  <script src="https://storage.googleapis.com/claat-public/codelab-elements.js"></script>
+  <script src="//support.google.com/inapp/api.js"></script>
+
+</body>
+</html>
